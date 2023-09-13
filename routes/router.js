@@ -356,18 +356,18 @@ router.post('/setUserPic', upload.single('image'), function(req, res, next) {
 
 
 				// Joi validate
-				// const schema = Joi.object(
-				// {
-				// 	user_id: Joi.string().alphanum().min(24).max(24).required()
-				// });
+				const schema = Joi.object(
+				{
+					user_id: Joi.string().alphanum().min(24).max(24).required()
+				});
 			
-				// const validationResult = schema.validate({user_id});
-				// if (validationResult.error != null) {
-				// 	console.log(validationResult.error);
+				const validationResult = schema.validate({user_id});
+				if (validationResult.error != null) {
+					console.log(validationResult.error);
 
-				// 	res.render('error', {message: 'Invalid user_id'});
-				// 	return;
-				// }				
+					res.render('error', {message: 'Invalid user_id'});
+					return;
+				}				
 				const success = await userCollection.updateOne({"_id": new ObjectId(user_id)},
 					{$set: {image_id: image_uuid}},
 					{}
